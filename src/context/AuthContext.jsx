@@ -1,10 +1,10 @@
 import { createContext, useContext, useState } from 'react';
+import { STORAGE_PREFIX, SESSION_TTL_MS, ALLOW_MOCK_WALLET } from '../config/env';
 
 const AuthContext = createContext(null);
 
-const SESSION_KEY = 'tradazone_auth';
-const WALLET_KEY = 'tradazone_last_wallet';
-const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+const SESSION_KEY = `${STORAGE_PREFIX}_auth`;
+const WALLET_KEY  = `${STORAGE_PREFIX}_last_wallet`;
 
 function loadSession() {
     try {
@@ -170,7 +170,10 @@ export function AuthProvider({ children }) {
                 return { success: false, error: 'rejected' };
             }
 
-            // Dev / demo fallback
+            // Mock wallet fallback — only permitted outside production
+            if (!ALLOW_MOCK_WALLET) {
+                return { success: false, error: 'not_installed' };
+            }
             const mockAddr = '0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7';
             const walletState = { address: mockAddr, isConnected: true, chainId: 'SN_MAIN', balance: '0', currency: 'STRK' };
             setWallet(walletState);
