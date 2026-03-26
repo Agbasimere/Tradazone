@@ -13,7 +13,11 @@ function NotificationSettings() {
     const [settings, setSettings] = useState({ payments: true, invoices: true, checkouts: false, marketing: false });
 
     const handleToggle = (id) => { setSettings({ ...settings, [id]: !settings[id] }); };
-    const handleSubmit = (e) => { e.preventDefault(); };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // API submit logic would go here
+    };
 
     return (
         <div>

@@ -36,7 +36,7 @@ function PasswordSettings() {
         e.preventDefault();
         if (formData.newPassword !== formData.confirmPassword) { setError('New passwords do not match'); return; }
         if (formData.newPassword.length < 8) { setError('Password must be at least 8 characters'); return; }
-        // Password change initiated
+        // API submit logic would go here
     };
 
     return (
