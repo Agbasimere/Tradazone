@@ -124,6 +124,7 @@ describe('handleConnectSuccess', () => {
     });
 
     it('falls back to user.walletAddress/walletType when onConnect args are falsy', async () => {
+        simulateWalletConnect = (onConnect) => onConnect(null, null);
         mockUser = { isAuthenticated: false, walletAddress: '0xFALLBACK', walletType: 'stellar' };
         mockOnConnectArgs = { walletAddress: null, walletType: null };
         await renderSignUp();

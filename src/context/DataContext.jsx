@@ -42,11 +42,14 @@ function save(key, data) {
 
 /* ---------- Provider ---------- */
 export function DataProvider({ children }) {
-    // Clear persisted data so the app starts as a fresh new user
-    localStorage.removeItem(KEYS.customers);
-    localStorage.removeItem(KEYS.invoices);
-    localStorage.removeItem(KEYS.checkouts);
-    localStorage.removeItem(KEYS.items);
+    // Clear persisted data once on mount so the app starts as a fresh new user
+    // (avoid clearing on every render — that races with in-flight saves).
+    useEffect(() => {
+        localStorage.removeItem(KEYS.customers);
+        localStorage.removeItem(KEYS.invoices);
+        localStorage.removeItem(KEYS.checkouts);
+        localStorage.removeItem(KEYS.items);
+    }, []);
 
     const [customers, setCustomers] = useState([]);
     const [invoices, setInvoices] = useState([]);
