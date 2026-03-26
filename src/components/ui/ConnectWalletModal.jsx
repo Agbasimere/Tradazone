@@ -141,7 +141,6 @@ function ConnectWalletModal({ isOpen, onClose, onConnect, connectWalletFn }) {
 
     const {
         completeWalletLogin,
-        isConnecting: isAuthConnecting,
         wallet,
         disconnectAll,
         installed,
@@ -153,6 +152,7 @@ function ConnectWalletModal({ isOpen, onClose, onConnect, connectWalletFn }) {
     // Reset transient state each time the modal is opened
     useEffect(() => {
         if (isOpen) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setConnecting(null);
             setError(null);
             setView('primary');

@@ -1,5 +1,6 @@
 /**
  * @fileoverview AuthContext — application-wide authentication and wallet state.
+ * eslint-disable react-refresh/only-export-components
  *
  * ISSUE: #151 (Build size limits for AuthContext)
  * Category: DevOps & Infrastructure
@@ -33,6 +34,8 @@
  *
  * @module AuthContext
  */
+
+/* eslint-disable react-refresh/only-export-components */
 
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { STORAGE_PREFIX, SESSION_TTL_MS, ALLOW_MOCK_WALLET } from '../config/env';
@@ -757,7 +760,7 @@ export function AuthProvider({ children }) {
             try {
                 const { disconnect } = await import("get-starknet");
                 await disconnect();
-            } catch (_) {
+            } catch {
                 // Swallow: disconnect is best-effort; always clear local state
             }
 
@@ -784,7 +787,7 @@ export function AuthProvider({ children }) {
             try {
                 const { disconnect } = await import("get-starknet");
                 await disconnect();
-            } catch (_) {
+            } catch {
                 // best-effort
             }
         }
@@ -833,8 +836,6 @@ export function AuthProvider({ children }) {
  * @example
  * const { connectWallet, user, wallet } = useAuth();
  */
-// eslint-disable-next-line react-refresh/only-export-components
-
 export function useAuth() {
     const context = useContext(AuthContext);
     if (!context) throw new Error("useAuth must be used within an AuthProvider");
