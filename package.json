@@ -76,6 +76,11 @@
       "path": "dist/assets/core-libs-*.js",
       "limit": "150 kB",
       "gzip": true
+    },
+    {
+      "path": "dist/assets/signin-*.js",
+      "limit": "100 kB",
+      "gzip": true
     }
   ],
   "scripts": {
