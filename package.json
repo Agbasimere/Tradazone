@@ -4,6 +4,28 @@
   "version": "0.0.0",
   "homepage": "https://Blockora-dex.github.io/Tradazone",
   "type": "module",
+  "size-limit": [
+    {
+      "path": "dist/assets/index-*.js",
+      "limit": "500 kB",
+      "gzip": true
+    },
+    {
+      "path": "dist/assets/wallet-*.js",
+      "limit": "500 kB",
+      "gzip": true
+    },
+    {
+      "path": "dist/assets/html2pdf-*.js",
+      "limit": "1 MB",
+      "gzip": true
+    },
+    {
+      "path": "dist/assets/data-context*.js",
+      "limit": "50 kB",
+      "gzip": true
+    }
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -34,6 +56,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@size-limit/preset-app": "^12.0.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
