@@ -22,14 +22,14 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
 
       - name: Run size-limit check
-        run: |
-          npm run size -- --json 2>&1 || true
+        run: npm run size
+        continue-on-error: true
 
       - name: Analyze bundle sizes
         run: |
@@ -61,7 +61,7 @@ jobs:
           name: bundle-report
           path: dist/
 
-      - name: Fail if size limits exceeded
+      - name: Check size-limit result
         run: |
           # Check if size-limit reported any errors
           RESULT=$(npm run size -- --json 2>&1 || true)
